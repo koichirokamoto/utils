@@ -27,7 +27,7 @@ func TestToUpperCamelCase(t *testing.T) {
 	}
 }
 
-func TestToLowerCamelCaes(t *testing.T) {
+func TestToLowerCamelCase(t *testing.T) {
 	type args struct {
 		s   string
 		sep string
@@ -43,7 +43,7 @@ func TestToLowerCamelCaes(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := ToLowerCamelCaes(tt.args.s, tt.args.sep); got != tt.want {
+			if got := ToLowerCamelCase(tt.args.s, tt.args.sep); got != tt.want {
 				t.Errorf("ToLowerCamelCaes() = %v, want %v", got, tt.want)
 			}
 		})

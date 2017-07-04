@@ -19,8 +19,8 @@ func ToUpperCamelCase(s, sep string) string {
 	return toCamelCase(s, sep)
 }
 
-// ToLowerCamelCaes return camel case string whose first character is lower case.
-func ToLowerCamelCaes(s, sep string) string {
+// ToLowerCamelCase return camel case string whose first character is lower case.
+func ToLowerCamelCase(s, sep string) string {
 	s = strings.TrimSpace(s)
 	if len(s) == 0 {
 		return s
