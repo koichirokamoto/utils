@@ -2,6 +2,7 @@ package utils
 
 import (
 	"strings"
+	"unicode/utf8"
 )
 
 // ToUpperCamelCase return camel case string whose first character is upper case.
@@ -12,7 +13,8 @@ func ToUpperCamelCase(s, sep string) string {
 	}
 
 	first := s[0]
-	if 97 <= first || first <= 122 {
+	// Check first is full rune because of discarding multi byte character.
+	if utf8.FullRune([]byte{first}) && 97 <= first && first <= 122 {
 		upper := strings.ToUpper(string(first))
 		s = upper + s[1:]
 	}
@@ -27,7 +29,8 @@ func ToLowerCamelCase(s, sep string) string {
 	}
 
 	first := s[0]
-	if 65 <= first || first <= 90 {
+	// Check first is full rune because of discarding multi byte character.
+	if utf8.FullRune([]byte{first}) && 65 <= first && first <= 90 {
 		lower := strings.ToLower(string(first))
 		s = lower + s[1:]
 	}
@@ -35,6 +38,10 @@ func ToLowerCamelCase(s, sep string) string {
 }
 
 func toCamelCase(s, sep string) string {
+	// If separator is empty, return s.
+	if sep == "" {
+		return s
+	}
 	i := strings.Index(s, sep)
 	if i == -1 {
 		return s
