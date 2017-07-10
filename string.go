@@ -48,3 +48,35 @@ func toCamelCase(s, sep string) string {
 	}
 	return s[:i] + ToUpperCamelCase(s[i+1:], sep)
 }
+
+// CamelCaseToUnderscoreSeparated return string separated.
+func CamelCaseToUnderscoreSeparated(s string, sep string) string {
+	if sep == "" {
+		return s
+	}
+
+	s = strings.TrimSpace(s)
+	if s == "" {
+		return s
+	}
+
+	var ns string
+	for _, r := range s {
+		b := make([]byte, utf8.RuneLen(r))
+		utf8.EncodeRune(b, r)
+		first := b[0]
+		if utf8.FullRune([]byte{b[0]}) && 65 <= first && first <= 90 {
+			ns += sep + strings.ToLower(string(r))
+			continue
+		}
+		ns += string(r)
+	}
+
+	return ns
+}
+
+func extendBuffer(source []byte, length int) []byte {
+	exb := make([]byte, length)
+	copy(exb, source)
+	return exb
+}

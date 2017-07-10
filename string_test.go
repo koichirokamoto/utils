@@ -53,3 +53,30 @@ func TestToLowerCamelCase(t *testing.T) {
 		})
 	}
 }
+
+func TestCamelCaseToUnderscoreSeparated(t *testing.T) {
+	type args struct {
+		s   string
+		sep string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{name: "separator is space", args: args{s: "instantDate", sep: " "}, want: "instant date"},
+		{name: "separator is comma", args: args{s: "instantDate", sep: ","}, want: "instant,date"},
+		{name: "separator is alpabet", args: args{s: "instantDate", sep: "a"}, want: "instantadate"},
+		{name: "separator is space and string is multi byte character", args: args{s: "今日は晴れ", sep: " "}, want: "今日は晴れ"},
+		{name: "separator is empty", args: args{s: "instantDate", sep: ""}, want: "instantDate"},
+		{name: "last character is upper case", args: args{s: "instantDateA", sep: "_"}, want: "instant_date_a"},
+		{name: "two upper case", args: args{s: "unionInformationMaster", sep: "_"}, want: "union_information_master"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := CamelCaseToUnderscoreSeparated(tt.args.s, tt.args.sep); got != tt.want {
+				t.Errorf("CamelCaseToUnderscoreSeparated() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
