@@ -74,9 +74,3 @@ func CamelCaseToUnderscoreSeparated(s string, sep string) string {
 
 	return ns
 }
-
-func extendBuffer(source []byte, length int) []byte {
-	exb := make([]byte, length)
-	copy(exb, source)
-	return exb
-}
