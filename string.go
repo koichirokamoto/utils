@@ -49,8 +49,8 @@ func toCamelCase(s, sep string) string {
 	return s[:i] + ToUpperCamelCase(s[i+1:], sep)
 }
 
-// CamelCaseToUnderscoreSeparated return string separated.
-func CamelCaseToUnderscoreSeparated(s string, sep string) string {
+// SeparateCamelCase separete camel case string by separator.
+func SeparateCamelCase(s string, sep string) string {
 	if sep == "" {
 		return s
 	}
